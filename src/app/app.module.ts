@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { combineReducers } from 'redux';
+import { IAppState } from './appstate';
 @NgModule({
   declarations: [
     AppComponent
@@ -19,7 +20,7 @@ import { combineReducers } from 'redux';
   bootstrap: [AppComponent]
 })
 export class AppModule { 
-  constructor(ngRedux: NgRedux<any>) {
+  constructor(ngRedux: NgRedux<IAppState>) {
     const STATE = {
       selectTitle: 'Select Title Works',
       subscribeTitle: 'Subscribed Title Works',
@@ -32,7 +33,7 @@ export class AppModule {
       console.log('action!', action, state);
       return state;
     };
-    let root = combineReducers<any>({ test });
+    let root = combineReducers<IAppState>({ test });
 
     ngRedux.configureStore(root,{});
   }
